@@ -19,6 +19,17 @@ export default function MyTeamsScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My Teams</Text>
+
+      <Pressable
+        style={({ pressed }) => [
+          styles.createTeamButton,
+          pressed && styles.buttonPressed,
+        ]}
+        onPress={() => router.push('/create-team')}
+      >
+        <Text style={styles.createTeamButtonText}>Create New Team</Text>
+      </Pressable>
+
       {teams.map((team: any) => {
         const initials = team.name
           .trim()
@@ -41,6 +52,7 @@ export default function MyTeamsScreen() {
           </Pressable>
         );
       })}
+
     </View>
   );
 }
@@ -96,5 +108,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: '#2B2B2B',
+  },
+
+  createTeamButton: {
+    position: 'absolute',
+    top: 24,
+    right: 24,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    alignItems: 'center',
+    backgroundColor: '#EF4444',
+    borderRadius: 12,
+    zIndex: 1,
+  },
+
+  buttonPressed: {
+    opacity: 0.75,
+  },
+
+  createTeamButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
   },
 });

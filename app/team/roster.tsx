@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function PlayersScreen() {
     const { id } = useLocalSearchParams();
+    const router = useRouter();
     const [teamName, setTeamName] = useState('');
     const [showForm, setShowForm] = useState(false);
     const [playerName, setPlayerName] = useState('');
@@ -69,7 +70,7 @@ export default function PlayersScreen() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
-                {teamName ? `${teamName} Players` : 'Manage Players'}
+                {teamName ? `${teamName} Roster` : 'Team Roster'}
             </Text>
 
             <Pressable
@@ -112,14 +113,30 @@ export default function PlayersScreen() {
             )}
 
             {roster.map((player) => (
-                <View key={player.id} style={styles.playerCard}>
+                <Pressable
+                    key={player.id}
+                    style={({ pressed }) => [
+                        styles.playerCard,
+                        pressed && styles.playerCardPressed,
+                    ]}
+                    onPress={() =>
+                        router.push({
+                            pathname: '/team/player',
+                            params: {
+                                teamId: String(id),
+                                playerId: player.id,
+                            },
+                        })
+                    }
+                >
                     <Text style={styles.playerName}>
                         #{player.number} {player.name}
                     </Text>
+
                     <Text style={styles.playerPositions}>
                         {player.positions || 'No position listed'}
                     </Text>
-                </View>
+                </Pressable>
             ))}
         </View>
     );
@@ -140,13 +157,15 @@ const styles = StyleSheet.create({
     },
 
     addPlayerButton: {
-        width: '100%',
-        maxWidth: 400,
-        marginTop: 28,
-        paddingVertical: 16,
+        position: 'absolute',
+        top: 24,
+        right: 24,
+        paddingHorizontal: 20,
+        paddingVertical: 12,
         alignItems: 'center',
         backgroundColor: '#EF4444',
         borderRadius: 12,
+        zIndex: 1,
     },
 
     addPlayerButtonText: {
@@ -194,6 +213,10 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#FFFFFF',
         borderRadius: 12,
+    },
+
+    playerCardPressed: {
+        opacity: 0.7,
     },
 
     playerName: {

@@ -2,11 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import {
-  Alert,
   Pressable,
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native';
 
 export default function HomeScreen() {
@@ -28,12 +27,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Pressable
-        style={styles.profileButton}
-        onPress={() => router.push('/account')}
-      >
-        <Text style={styles.profileButtonText}>👤</Text>
-      </Pressable>
 
       <Text style={styles.title}>BenchBoss</Text>
       <Text style={styles.tagline}>Track faster. Coach smarter.</Text>
@@ -57,9 +50,7 @@ export default function HomeScreen() {
               styles.primaryButton,
               pressed && styles.buttonPressed,
             ]}
-            onPress={() =>
-              Alert.alert('Start Game', 'The game setup will be added later.')
-            }
+            onPress={() => router.push('/start-game')}
           >
             <Text style={styles.buttonText}>Start Game</Text>
           </Pressable>
@@ -79,14 +70,19 @@ export default function HomeScreen() {
               styles.primaryButton,
               pressed && styles.buttonPressed,
             ]}
-            onPress={() =>
-              Alert.alert(
-                'Recent Games',
-                'Completed games will appear here later.'
-              )
-            }
+            onPress={() => router.push('/recent-games')}
           >
             <Text style={styles.buttonText}>Recent Games</Text>
+          </Pressable>
+
+          <Pressable
+            style={({ pressed }) => [
+              styles.primaryButton,
+              pressed && styles.buttonPressed,
+            ]}
+            onPress={() => router.push('/account')}
+          >
+            <Text style={styles.buttonText}>Account Settings</Text>
           </Pressable>
         </View>
       )}
@@ -101,22 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
     backgroundColor: '#E8DCC4',
-  },
-
-  profileButton: {
-    position: 'absolute',
-    top: 24,
-    right: 24,
-    width: 48,
-    height: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-  },
-
-  profileButtonText: {
-    fontSize: 24,
   },
 
   title: {

@@ -248,3 +248,99 @@ Pause feature development briefly to map out the larger BenchBoss navigation flo
 - Restructure the Team Dashboard around Roster, Start Game, Games, Stats, and Team Settings.
 - Convert the current player-management flow into a proper roster experience.
 - Continue mapping the app flow as each section becomes functional.
+
+## Day 3 – Dashboard Navigation, Team Dashboard, Roster, and Player Dashboard
+
+### Goals
+- Complete the main BenchBoss dashboard navigation.
+- Begin building the My Teams branch from the app map.
+- Create functional team, roster, and player dashboard navigation.
+- Establish placeholder layouts for future team and player data.
+
+### Completed
+
+#### Main Dashboard
+- Connected the Start Game button to the existing Start Game screen.
+- Created a dedicated Recent Games placeholder screen.
+- Connected the Recent Games button to the new screen.
+- Replaced the small profile icon with a full Account Settings dashboard button.
+- The main dashboard now includes four matching buttons:
+  - Start Game
+  - My Teams
+  - Recent Games
+  - Account Settings
+
+#### Future Dashboard Design Notes
+- Plan to create a custom BenchBoss logo during the styling phase.
+- Plan to display the four main dashboard buttons horizontally for the tablet-first layout.
+- Current vertical layout remains in place while functionality is developed.
+
+#### My Teams Screen
+- Added a Create New Team button.
+- Positioned the Create New Team button in the upper-right corner.
+- Existing saved teams remain selectable from the Teams Dashboard.
+
+#### Selected Team Dashboard
+- Redesigned the selected-team screen into a tablet-focused dashboard layout.
+- Added a left-side action menu containing:
+  - Manage Players
+  - Team Settings placeholder
+  - Team Stats placeholder
+- Added a roster preview section.
+- Added Recent Games and Upcoming Games placeholder panels.
+- Added a Team Goals / Notes placeholder panel.
+- Connected both Manage Players and the Roster heading to the full roster screen.
+- Loaded and displayed the selected team’s saved players in the roster preview.
+- Made roster preview player cards selectable.
+- Player selections now open the individual Player Dashboard.
+
+#### File and Route Cleanup
+- Renamed the full roster screen from:
+  - `app/team/players.tsx`
+- To:
+  - `app/team/roster.tsx`
+- Updated team dashboard routes from `/team/players` to `/team/roster`.
+- Created:
+  - `app/team/player.tsx`
+- Final routes are now:
+  - `/team/roster` for the full team roster
+  - `/team/player` for an individual player dashboard
+
+#### Player Dashboard
+- Created a functional individual Player Dashboard.
+- Loaded the selected player using the team ID and player ID.
+- Displayed the saved player name, jersey number, and position.
+- Redesigned the Player Dashboard based on the new layout map.
+- Added a player information panel containing:
+  - Player Bio placeholder
+  - Position display
+  - Current Status placeholder
+- Added a Season Stat Averages section containing:
+  - Current Season placeholder
+  - Previous Season placeholder
+  - Earlier Season placeholder
+- Added a Recent Game Stats section with multiple game performance placeholders.
+- Added a Player Notes / Goals section.
+- Added a Back to Team button.
+
+#### Roster Screen
+- Updated the screen heading from Players / Manage Players to Team Roster.
+- Positioned the Add Player button in the upper-right corner.
+- Made each player card selectable.
+- Player cards on the full roster screen now open the same individual Player Dashboard.
+
+### Current App Flow
+
+Login / Welcome
+→ BenchBoss Dashboard
+→ My Teams
+→ Selected Team Dashboard
+→ Team Roster
+→ Player Dashboard
+
+The Player Dashboard can also be opened directly from the roster preview on the Selected Team Dashboard.
+
+### Notes
+- Current layouts prioritize structure and navigation over final visual styling.
+- Team Settings, Team Stats, game history, upcoming games, notes, and player statistics currently use placeholders.
+- The app is being developed tablet-first, with responsive and visual polish planned after the primary screen structure is functional.
