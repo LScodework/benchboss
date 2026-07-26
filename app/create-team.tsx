@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
   Alert,
@@ -10,6 +11,7 @@ import {
 } from 'react-native';
 
 export default function CreateTeamScreen() {
+  const router = useRouter();
   const [teamName, setTeamName] = useState('');
   const [teamColor, setTeamColor] = useState('#EF4444');
 
@@ -41,6 +43,7 @@ export default function CreateTeamScreen() {
     Alert.alert('Team created!', teamName.trim());
     setTeamName('');
     setTeamColor('#EF4444');
+    router.replace('/');
   };
 
   return (

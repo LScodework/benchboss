@@ -182,3 +182,69 @@
 - Consider player editing and deletion.
 - Begin planning the game-creation and live-stat-tracking flow.
 - Delay heavy visual styling until the main app structure and functionality are stable.
+
+## Day 2b — Account Home Flow
+
+### Goal
+
+Pause feature development briefly to map out the larger BenchBoss navigation flow and begin restructuring the current app around a coach or manager account.
+
+### Planning and User Flow Decisions
+
+- Began mapping the BenchBoss app flow in FigJam.
+- Decided the app will eventually open with a login or account creation screen.
+- Established two versions of the Account Home screen:
+  - First-time users with no teams see only a button prompting them to create their first team.
+  - Returning users with at least one team see Start Game, My Teams, Recent Games, and an Account/Profile button.
+- Decided that after a user creates their first team, they return to the normal Account Home.
+- Decided that additional teams will later be created from the My Teams screen.
+- Confirmed that Start Game will eventually be accessible from both Account Home and an individual Team Dashboard.
+- Confirmed that both Start Game entry points will lead into the same game setup flow.
+- Chose to keep the initial live stat-tracking concept focused on the user’s own team rather than requiring full opponent roster entry.
+- Decided to postpone detailed game-screen planning until the account, team, dashboard, and roster flows are functional.
+
+### Account Home Updates
+
+- Reworked `app/index.tsx` into an Account Home screen.
+- Added an AsyncStorage check that runs whenever the Home screen receives focus.
+- The app now checks whether at least one saved team exists.
+- Users with no saved teams see:
+  - Create your first team to get started
+- Users with at least one saved team see:
+  - Start Game
+  - My Teams
+  - Recent Games
+- Added a profile icon button in the upper-right corner.
+- Preserved the existing BenchBoss title, tagline, cream background, and red button styling.
+
+### Create Team Flow Update
+
+- Updated `app/create-team.tsx` to use Expo Router.
+- After a team is successfully saved, the user is now returned to the normal Account Home.
+- The Account Home automatically recognizes the newly created team and changes from the first-time layout to the returning-user layout.
+
+### Account Screen
+
+- Added `app/account.tsx`.
+- Connected the Account Home profile icon to the new Account screen.
+- Added placeholder text for future profile and account settings.
+- Added a Back to Home button.
+- Confirmed that navigation to and from the Account screen works correctly.
+
+### Current Working Flow
+
+- Account Home checks for saved teams.
+- Existing users see Start Game, My Teams, Recent Games, and Profile.
+- First-time users will see only the first-team creation prompt.
+- Create Team saves the team and returns to Account Home.
+- My Teams continues to open the existing saved-team list.
+- The profile icon opens the Account screen.
+- Start Game and Recent Games still use temporary placeholder behavior and will receive dedicated screens next.
+
+### Next Steps
+
+- Add dedicated placeholder screens for Start Game and Recent Games.
+- Add a Create Team button inside My Teams for additional teams.
+- Restructure the Team Dashboard around Roster, Start Game, Games, Stats, and Team Settings.
+- Convert the current player-management flow into a proper roster experience.
+- Continue mapping the app flow as each section becomes functional.
